@@ -1,5 +1,7 @@
 Feature: Login feature
 
   Scenario: As a valid user I can log into my app
-    When I press "Login"
-    Then I see "Welcome to coolest app ever"
+    	Then I enter text "ali@practo.com" into field with id "et_username"
+  	Then I enter text "Test#321" into field with id "et_password"
+	When I press "Login"
+
