@@ -1,8 +1,8 @@
-install: gem install calabash-android
 before_install:
- - apt-get update
+ - gem install calabash-android
  - apt-get install ruby2.1-dev
  # - wget http://dl.google.com/android/android-sdk_r18-linux.tgz
  # - tar -zxf android-sdk_r18-linux.tgz
  # - export ANDROID_HOME=`pwd`/android-sdk-linux
  # - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+script: calabash-android help
