@@ -1,25 +1,28 @@
-language : android
-jdk: oraclejdk7
-env:
-  matrix:
-    #- ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
-     - ANDROID_SDKS=android-19 ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+language: android
+
 android:
   components:
     - build-tools-21.1.2
-    - sys-img-armeabi-v7a-android-19
-    - sys-img-x86-android-17
-    - platform-tools
-  licenses:
-    - android-sdk-license-.+
+    - android-20
+    - android-21
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-21
+
+notifications:
+  email: true
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
+
 before_install:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
   - gem install calabash-android
- # - apt-get install ruby2.1-dev
- # - wget http://dl.google.com/android/android-sdk_r18-linux.tgz
- # - tar -zxf android-sdk_r18-linux.tgz
- # - export ANDROID_HOME=`pwd`/android-sdk-linux
- # - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+
+before_script:
+  - ./scripts/wait_for_emulator.sh
+  - adb shell input keyevent 82 &
+
 script: calabash-android run app-debug.apk
