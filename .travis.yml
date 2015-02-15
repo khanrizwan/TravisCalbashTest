@@ -31,4 +31,5 @@ before_script:
 script:
   - adb start-server
   - adb devices
+  - calabash-android resign app-debug.apk
   - calabash-android run app-debug.apk
