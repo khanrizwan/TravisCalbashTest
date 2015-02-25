@@ -4,4 +4,3 @@ Feature: Login feature
     	Then I enter text "xyz@abc.com" into field with id "et_username"
   	Then I enter text "Test#321" into field with id "et_password"
 	When I press "Login"
-
